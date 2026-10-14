@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nuestra Invitación</title>
+
+<!-- METATAGS DE CONFIGURACIÓN PARA MINIATURA DE WHATSAPP -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Isabel & Martin - Nuestra Boda">
+<meta property="og:description" content="¡Estás invitado a nuestra boda! Haz clic aquí para ver todos los detalles.">
+
+<!-- RUTA COMPLETA DE TU IMAGEN EN GITHUB PAGES -->
+<meta property="og:image" content="https://invitaendigitalweb-svg.github.io/bodaisabelymartin/miniatura.jpg">
+<meta property="og:image:secure_url" content="https://invitaendigitalweb-svg.github.io/bodaisabelymartin/miniatura.jpg">
+
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background-color: #F9F8F5;
+            font-family: 'Cinzel', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* MARCO DE CELULAR ADAPTABLE */
+        .mobile-screen {
+            width: 100%;
+            max-width: 430px;
+            height: 100vh;
+            height: 100dvh;
+            position: relative;
+            background-color: #F9F8F5;
+            box-shadow: 0 0 30px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        /* SCROLL INTERIOR SIN BARRA VISIBLE */
+        .invitation-wrapper {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            background-color: #F9F8F5;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            scroll-behavior: smooth;
+            opacity: 0;
+            transition: opacity 1.8s ease 0.3s;
+        }
+
+        .invitation-wrapper.open-portada {
+            opacity: 1;
+        }
+
+        .invitation-wrapper::-webkit-scrollbar {
+            display: none;
+            width: 0;
+            height: 0;
+        }
+
+        /* ESTILOS DE IMÁGENES SIN MÁRGENES NI LÍNEAS DE SEPARACIÓN */
+        .image-section {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            display: block;
+            position: relative;
+            line-height: 0;
+            font-size: 0;
+            border: none;
+            outline: none;
+        }
+
+        .image-section img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0;
+            padding: 0;
+            border: none;
+            outline: none;
+            vertical-align: bottom;
+        }
+
+        /* PORTADA COMPLETA SIN MARGENES NI CORTE CON LA FECHA */
+        .portada-section {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            line-height: 0;
+            font-size: 0;
+        }
+
+        .portada-section img {
+            width: 100%;
+            height: auto;
+            display: block;
+            opacity: 0.9;
+            transform: translateY(0);
+            transition: transform 3.5s ease-out, opacity 3.5s ease-out;
+            vertical-align: bottom;
+        }
+
+        .open-portada .portada-section img {
+            opacity: 1;
+            animation: floatPortada 7s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatPortada {
+            0% { transform: translateY(0px) scale(1); }
+            100% { transform: translateY(-6px) scale(1.005); }
+        }
+
+        /* ESTILOS DEL CONTADOR (FONDO #F7F7F7, LETRA #545435) */
+        .contador-section {
+            width: 100%;
+            padding: 30px 15px 40px 15px;
+            text-align: center;
+            background-color: #F7F7F7;
+            font-family: 'Montserrat', sans-serif;
+            line-height: normal;
+        }
+
+        .tiempo {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .unidad {
+            min-width: 70px;
+        }
+
+        .numero {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 50px;
+            line-height: 1;
+            color: #545435;
+            font-weight: 600;
+        }
+
+        .texto {
+            margin-top: 7px;
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #545435;
+        }
+
+        .separador {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 40px;
+            color: #545435;
+            line-height: 1;
+            margin-top: 2px;
+        }
+
+        /* CONTENEDOR DE BOTÓN UBICACIÓN DEBAJO DE LA IMAGEN */
+        .btn-container {
+            width: 100%;
+            background-color: #F7F7F7;
+            padding: 20px 15px 30px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: normal;
+        }
+
+        .btn-ubicacion {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #545435;
+            color: #FFFFFF;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(84, 84, 53, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .btn-ubicacion:active {
+            transform: scale(0.97);
+        }
+
+        .btn-ubicacion svg {
+            width: 16px;
+            height: 16px;
+            fill: #FFFFFF;
+        }
+
+        .gift-container {
+            position: relative;
+            width: 100%;
+        }
+
+        /* ESTILOS DE CONFIRMACIÓN DE ASISTENCIA EN TONOS VERDE OLIVO Y FONDO #F7F7F7 */
+        .rsvp-wrapper {
+            width: 100%;
+            background-color: #F7F7F7;
+            padding: 20px 15px 40px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: normal;
+        }
+
+        .tarjeta-asistencia {
+            width: 100%;
+            background: #F7F7F7;
+            border: 1px solid #545435;
+            border-radius: 25px;
+            padding: 35px 28px;
+            box-shadow: 0 15px 45px rgba(84, 84, 53, 0.12);
+            font-family: 'Montserrat', sans-serif;
+            color: #545435;
+        }
+
+        .grupo {
+            margin-bottom: 22px;
+            position: relative;
+        }
+
+        .etiqueta {
+            display: block;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            color: #545435;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .tarjeta-asistencia input[type="text"] {
+            width: 100%;
+            padding: 14px 15px;
+            border-radius: 12px;
+            border: 1px solid #c2c2b0;
+            background: #ffffff;
+            outline: none;
+            font-family: 'Montserrat', sans-serif;
+            color: #545435;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .tarjeta-asistencia input[type="text"]:focus {
+            border-color: #545435;
+            box-shadow: 0 0 8px rgba(84, 84, 53, 0.3);
+        }
+
+        .opciones {
+            display: flex;
+            gap: 12px;
+        }
+
+        .opcion {
+            flex: 1;
+        }
+
+        .opcion input {
+            display: none;
+        }
+
+        .opcion label {
+            display: block;
+            text-align: center;
+            padding: 13px 8px;
+            border: 1px solid #c2c2b0;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 13px;
+            background: #ffffff;
+            color: #545435;
+            transition: .2s;
+        }
+
+        .opcion input:checked + label {
+            background: #545435;
+            border-color: #545435;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .boton-asistencia {
+            width: 100%;
+            border: 0;
+            border-radius: 30px;
+            padding: 16px;
+            background: #545435;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(84, 84, 53, 0.25);
+            transition: all 0.2s ease;
+        }
+
+        .boton-asistencia:hover {
+            background: #3e3e27;
+        }
+
+        .boton-asistencia:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+        }
+
+        .mensaje-asistencia {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            background: #ffffff;
+            border: 1px solid #c2c2b0;
+            line-height: 1.5;
+            font-size: 13.5px;
+            color: #545435;
+        }
+
+        .mensaje-asistencia.visible {
+            display: block;
+        }
+
+        /* ANIMACIÓN DE ENTRADA GENERAL */
+        .reveal-section {
+            opacity: 0;
+            transform: translateY(40px) scale(0.97);
+            transition: opacity 1.4s ease-out, transform 1.4s ease-out;
+        }
+
+        .reveal-section.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* SOBRE INTERACTIVO HABILITADO EN TODA LA SUPERFICIE */
+        .envelope-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            height: 100dvh;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #4A0E0E;
+            cursor: pointer;
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s ease;
+        }
+
+        .envelope-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .envelope-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .open.envelope-container {
+            opacity: 0;
+            transform: scale(1.08);
+            visibility: hidden;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="mobile-screen">
+
+    <audio id="bg-music" src="cancion.mp3" loop></audio>
+
+    <div class="invitation-wrapper" id="invitation">
+
+        <!-- 1. PORTADA -->
+        <div class="image-section portada-section">
+            <img src="portada.jpg" alt="Portada">
+        </div>
+
+        <!-- 2. FECHA -->
+        <div class="image-section reveal-section">
+            <img src="fecha.jpg" alt="Fecha">
+        </div>
+
+        <!-- 3. CONTADOR -->
+        <div class="contador-section reveal-section">
+            <div class="tiempo">
+                <div class="unidad">
+                    <div class="numero" id="dias">00</div>
+                    <div class="texto">Días</div>
+                </div>
+
+                <div class="separador">:</div>
+
+                <div class="unidad">
+                    <div class="numero" id="horas">00</div>
+                    <div class="texto">Horas</div>
+                </div>
+
+                <div class="separador">:</div>
+
+                <div class="unidad">
+                    <div class="numero" id="minutos">00</div>
+                    <div class="texto">Minutos</div>
+                </div>
+
+                <div class="separador">:</div>
+
+                <div class="unidad">
+                    <div class="numero" id="segundos">00</div>
+                    <div class="texto">Segundos</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. CEREMONIA -->
+        <div class="image-section reveal-section">
+            <img src="ceremonia.jpg" alt="Ceremonia">
+        </div>
+
+        <!-- BOTÓN CEREMONIA DEBAJO CON FONDO #F7F7F7 -->
+        <div class="btn-container reveal-section">
+            <a href="https://www.google.com/maps/place/Parroquia+de+La+Divina+Providencia/@20.6582542,-105.2357524,785m/data=!3m2!1e3!4b1!4m6!3m5!1s0x8421459a0a80ac7f:0x434ea9e3440e9274!8m2!3d20.6582542!4d-105.2357524!16s%2Fg%2F11byyj5vfw?hl=es-419&entry=ttu&g_ep=EgoyMDI2MTAxMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" class="btn-ubicacion">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+                Ver ubicación
+            </a>
+        </div>
+
+        <!-- 5. RECEPCIÓN -->
+        <div class="image-section reveal-section">
+            <img src="recepcion.jpg" alt="Recepción">
+        </div>
+
+        <!-- BOTÓN RECEPCIÓN DEBAJO CON FONDO #F7F7F7 -->
+        <div class="btn-container reveal-section">
+            <a href="https://www.google.com/maps/place/Jard%C3%ADn+Terraza+El+Encanto+PV/@20.6653795,-105.2216881,785m/data=!3m2!1e3!4b1!4m6!3m5!1s0x842145224afe81bd:0x2c6407bc21621d03!8m2!3d20.6653795!4d-105.2216881!16s%2Fg%2F11hf3qcvlx?hl=es-US&entry=ttu&g_ep=EgoyMDI2MTAxMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" class="btn-ubicacion">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+                Ver ubicación
+            </a>
+        </div>
+
+        <!-- 6. VESTIMENTA -->
+        <div class="image-section reveal-section">
+            <img src="vestimenta.jpg" alt="Vestimenta">
+        </div>
+
+        <!-- 7. REGALO -->
+        <div class="image-section reveal-section gift-container">
+            <img src="regalo.jpg" alt="Regalo">
+        </div>
+
+        <!-- 8. FOTO DE ASISTENCIA -->
+        <div class="image-section reveal-section">
+            <img src="asistencia.jpg" alt="Asistencia">
+        </div>
+
+        <!-- 9. CONFIRMACIÓN DE ASISTENCIA (FORMULARIO RSVP) -->
+        <div class="rsvp-wrapper reveal-section">
+            <div class="tarjeta-asistencia">
+                <div class="grupo">
+                    <label class="etiqueta">Nombre completo</label>
+                    <input id="nombre" type="text" placeholder="Nombre y dos apellidos" autocomplete="off">
+                </div>
+
+                <div class="grupo">
+                    <label class="etiqueta">¿Asistirás al evento?</label>
+                    <div class="opciones">
+                        <div class="opcion">
+                            <input type="radio" name="asistencia" id="si" value="Sí">
+                            <label for="si">Sí asistiré</label>
+                        </div>
+                        <div class="opcion">
+                            <input type="radio" name="asistencia" id="no" value="No">
+                            <label for="no">No podré ir</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="boton-asistencia" id="boton" onclick="enviar()">Enviar respuesta</button>
+
+                <div id="mensaje" class="mensaje-asistencia"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SOBRE CON IMAGEN Y ACCIÓN DE APERTURA AL DAR CLIC/TOCAR -->
+    <div class="envelope-container" id="envelope" onclick="openEnvelope()" ontouchstart="openEnvelope()">
+        <div class="envelope-image-wrapper">
+            <img src="sobre.jpg" alt="Sobre de Invitación">
+        </div>
+    </div>
+
+</div>
+
+<script>
+    let isOpen = false;
+    const music = document.getElementById("bg-music");
+    const wrapper = document.getElementById("invitation");
+
+    function openEnvelope() {
+        if (!isOpen) {
+            isOpen = true;
+            document.getElementById("envelope").classList.add("open");
+            wrapper.classList.add("open-portada");
+            
+            var playPromise = music.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(function(error) {
+                    console.log("Audio no reproducido automáticamente:", error);
+                });
+            }
+
+            checkScroll();
+        }
+    }
+
+    function checkScroll() {
+        const reveals = document.querySelectorAll('.reveal-section');
+        const triggerBottom = wrapper.clientHeight * 0.9;
+
+        reveals.forEach(section => {
+            const sectionTop = section.getBoundingClientRect().top;
+            if (sectionTop < triggerBottom) {
+                section.classList.add('visible');
+            }
+        });
+    }
+
+    wrapper.addEventListener('scroll', checkScroll);
+
+    /* CONTADOR CONFIGURADO A 12 DE DICIEMBRE DE 2026 A LAS 6:00 PM */
+    const fechaEvento = new Date("December 12, 2026 18:00:00").getTime();
+
+    function actualizarContador() {
+        const ahora = new Date().getTime();
+        const diferencia = fechaEvento - ahora;
+
+        if (diferencia <= 0) {
+            document.getElementById("dias").innerHTML = "00";
+            document.getElementById("horas").innerHTML = "00";
+            document.getElementById("minutos").innerHTML = "00";
+            document.getElementById("segundos").innerHTML = "00";
+            return;
+        }
+
+        const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+        const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+        document.getElementById("dias").innerHTML = String(dias).padStart(2, "0");
+        document.getElementById("horas").innerHTML = String(horas).padStart(2, "0");
+        document.getElementById("minutos").innerHTML = String(minutos).padStart(2, "0");
+        document.getElementById("segundos").innerHTML = String(segundos).padStart(2, "0");
+    }
+
+    actualizarContador();
+    setInterval(actualizarContador, 1000);
+
+    /* LÓGICA Y ENVÍO DE CONFIRMACIÓN DE ASISTENCIA */
+    const API_URL = "https://script.google.com/macros/s/AKfycbzvg5JKvg49366uZsmxYyWbaIs4A2b1K5zBWqyr4W3gCSAoYpf6_jFsmDqLEGvVPIAuCw/exec";
+
+    let enviando = false;
+
+    function normalizarTexto(texto) {
+      if (!texto) return "";
+      return texto
+        .toString()
+        .trim()
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function llamarAPI(parametros) {
+      return new Promise((resolve, reject) => {
+        const callback = 'cb_' + Date.now() + '_' + Math.floor(Math.random() * 9999);
+        const script = document.createElement('script');
+        const query = new URLSearchParams({ ...parametros, callback });
+        
+        const tiempo = setTimeout(() => { 
+          limpiar(); 
+          reject("Tiempo agotado"); 
+        }, 25000);
+
+        window[callback] = function(data) {
+          clearTimeout(tiempo);
+          limpiar();
+          resolve(data);
+        };
+
+        function limpiar() {
+          delete window[callback];
+          if (script.parentNode) script.parentNode.removeChild(script);
+        }
+
+        script.onerror = function() {
+          clearTimeout(tiempo);
+          limpiar();
+          reject("Error al conectar con el servidor");
+        };
+
+        script.src = API_URL + '?' + query.toString();
+        document.body.appendChild(script);
+      });
+    }
+
+    async function enviar() {
+      if (enviando) return;
+
+      const nombreInput = document.getElementById('nombre').value.trim();
+      const asistencia = document.querySelector('input[name="asistencia"]:checked')?.value;
+      const mensaje = document.getElementById('mensaje');
+      const boton = document.getElementById('boton');
+
+      if (!nombreInput || !asistencia) {
+        mostrarMensaje('Por favor escribe tu nombre y selecciona si asistirás.');
+        return;
+      }
+
+      const palabras = nombreInput.split(/\s+/).filter(word => word.length > 0);
+      if (palabras.length < 3) {
+        mostrarMensaje('Por favor ingresa tu nombre completo (Nombre y dos apellidos).');
+        return;
+      }
+
+      enviando = true;
+      boton.disabled = true;
+      boton.textContent = 'Guardando...';
+      mensaje.className = 'mensaje-asistencia';
+
+      try {
+        const respuesta = await llamarAPI({
+          action: 'confirmar',
+          nombre: nombreInput,
+          nombreClave: normalizarTexto(nombreInput),
+          asistencia: asistencia
+        });
+
+        if (respuesta && respuesta.status === 'duplicado') {
+          mostrarMensaje('Tu respuesta ya había sido registrada previamente.');
+        } else {
+          let mensajeExito = (asistencia === 'No') 
+            ? 'Muchas gracias por responder. Lamentamos que no puedas acompañarnos.'
+            : '¡Muchas gracias! Tu respuesta ha sido guardada exitosamente.';
+
+          mostrarMensaje(mensajeExito);
+          document.getElementById('nombre').value = '';
+          document.querySelectorAll('input[name="asistencia"]').forEach(r => r.checked = false);
+        }
+
+      } catch (error) {
+        console.error(error);
+        mostrarMensaje('Ocurrió un error al guardar tu respuesta. Por favor intenta de nuevo.');
+      } finally {
+        enviando = false;
+        boton.disabled = false;
+        boton.textContent = 'Enviar respuesta';
+      }
+    }
+
+    function mostrarMensaje(texto) {
+      const mensaje = document.getElementById('mensaje');
+      mensaje.className = 'mensaje-asistencia visible';
+      mensaje.textContent = texto;
+    }
+</script>
+
+</body>
+</html>
